@@ -46,13 +46,13 @@ fun runMenu(){
 }
 
 fun addAlbum(){
-
+    logger.info{"addAlbum() function invoked"}
 }
 
 fun updateAlbum(){
-
+    logger.info{"updateAlbum() function invoked"}
 }
 
 fun deleteAlbum(){
-
+    logger.info{"deleteAlbum() function invoked"}
 }
