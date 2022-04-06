@@ -1,5 +1,11 @@
 import utils.ScannerInput
 import java.lang.System.exit
+import mu.KotlinLogging
+
+
+// variables
+private val logger = KotlinLogging.logger {}
+
 
 fun main(args: Array<String>) {
     runMenu()
@@ -32,6 +38,21 @@ fun runMenu(){
         val option = mainMenu()
         when(option){
             0 -> exit(0)
+            1 -> addAlbum()
+            2 -> updateAlbum()
+            3 -> deleteAlbum()
         }
     }while (true)
+}
+
+fun addAlbum(){
+
+}
+
+fun updateAlbum(){
+
+}
+
+fun deleteAlbum(){
+
 }
