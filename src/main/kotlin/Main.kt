@@ -6,6 +6,7 @@ import controllers.CardAPI
 import models.Card
 import persistence.XMLSerializer
 import utils.ScannerInput.readNextInt
+import utils.Utilities
 import java.io.File
 
 
@@ -82,7 +83,47 @@ fun addCard(){
 
 // this function will allow the use rot update an existing card
 fun updateCard(){
-    logger.info{"updateCard() function invoked"}
+//    logger.info { "updateCard() function invoked" }
+    listAllCards()
+    if (cardAPI.numberOfCards() > 0) {
+        //only ask the user to choose the card if notes exist
+        val indexToUpdate = readNextInt("Enter the index of the card to update: ")
+        // getting the user to enter the card name
+        val cardName = readNextLine("Enter new card name: ")
+        // get the user to enter the card number of the card
+        var cardNum = readNextInt("Enter card number: ")
+        // get the user to enter the card rarity
+        var rarity = readNextLine("Enter card rarity: ")
+        // validate if the category is one of the allowed categories
+        while(!rarity.equals("common" ) || !rarity.equals("uncommon") || !rarity.equals("rare") || !rarity.equals("very rare") || !rarity.equals("ultra rare")) {
+            // if the category is correct then break out of the while loop
+            if(rarity.equals("common") || rarity.equals("uncommon") || rarity.equals("rare") || rarity.equals("very rare") || rarity.equals("ultra rare")){
+                break
+            }
+            rarity = readNextLine("Enter card rarity: ")
+        }
+        // get the user to enter the status of the note
+        var quality = readNextInt("Enter card quality: ")
+        // validate if the quality if quality is in range
+        while(!Utilities.validRange(quality,0,10)) {
+            // if the quality is within range
+            if(Utilities.validRange(quality,0,10)){
+                break
+            }
+            // if the quality is in-correct then ask user for input again
+            quality = readNextInt("Enter card quality: ")
+        }
+
+        //pass the index of the note and the new note details to NoteAPI for updating and check for success.
+        if (cardAPI.updateCard(indexToUpdate, Card(cardName, cardNum, rarity, quality))){
+            println("Update Successful")
+        } else {
+            println("Update Failed")
+        }
+
+    } else {
+        println("There are no cards for this index number")
+    }
 }
 
 // this function will allow the user to delete an existing card
