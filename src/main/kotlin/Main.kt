@@ -57,7 +57,7 @@ fun runMenu(){
             // run deleteAlbum function
             3 -> deleteCard()
             // run listAlbums function
-            4 -> listCards()
+            4 -> listAllCards()
         }
     }while (true)
 }
@@ -86,14 +86,17 @@ fun updateCard(){
 }
 
 // this function will allow the user to delete an existing card
-// and all the cards inside of it
+// and all the cards inside it
 fun deleteCard(){
     logger.info{"deleteCard() function invoked"}
 }
 
 // this function will allow the user to display all the existing cards
-fun listCards(){
-    logger.info{"listCards() function invoked"}
+fun listAllCards(){
+    //logger.info{"listCards() function invoked"}
+    if(cardAPI.numberOfCards() > 0){
+        println(cardAPI.listAllCards())
+    }else println("No cards stored")
 }
 
 // this function allows the suer to exit the app
