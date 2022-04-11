@@ -1,4 +1,8 @@
 package models
 
-class Card {
-}
+data class Card(
+    val name: String,
+    val id: Int,
+    val rarity: String,
+    val quality: Int
+) {}
