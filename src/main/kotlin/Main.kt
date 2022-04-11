@@ -1,6 +1,7 @@
 import utils.ScannerInput
 import java.lang.System.exit
 import mu.KotlinLogging
+import utils.ScannerInput.readNextLine
 
 
 // variables
@@ -58,7 +59,15 @@ fun runMenu(){
 
 // this function will allow the user to add a new card
 fun addCard(){
-    logger.info{"addCard() function invoked"}
+    //logger.info{"addCard() function invoked"}
+    // getting the user to enter the card name
+    val cardName = readNextLine("Enter card name: ")
+    // getting the user to enter the card number
+    val cardNum = readNextLine("Enter card number: ")
+    // getting the user to enter the rarity of the card
+    val cardRarity = readNextLine("Enter card rarity: ")
+    // getting the user to enter card quality between 1-10
+    val cardQuality = readNextLine("Enter the card quality: ")
 }
 
 // this function will allow the use rot update an existing card
