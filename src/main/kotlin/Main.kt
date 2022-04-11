@@ -2,11 +2,13 @@ import utils.ScannerInput
 import java.lang.System.exit
 import mu.KotlinLogging
 import utils.ScannerInput.readNextLine
+import controllers.CardAPI
+import models.Card
+import utils.ScannerInput.readNextInt
 
 
 // variables
 private val logger = KotlinLogging.logger {}
-
 
 fun main(args: Array<String>) {
     // here we will load the files
@@ -63,11 +65,17 @@ fun addCard(){
     // getting the user to enter the card name
     val cardName = readNextLine("Enter card name: ")
     // getting the user to enter the card number
-    val cardNum = readNextLine("Enter card number: ")
+    val cardNum = readNextInt("Enter card number: ")
     // getting the user to enter the rarity of the card
     val cardRarity = readNextLine("Enter card rarity: ")
     // getting the user to enter card quality between 1-10
-    val cardQuality = readNextLine("Enter the card quality: ")
+    val cardQuality = readNextInt("Enter the card quality: ")
+
+    val isAdded = CardAPI.add(Card(cardName,cardNum,cardRarity,cardQuality))
+    if(isAdded) println("Added Successfully")
+    else println("Add Failed")
+
+
 }
 
 // this function will allow the use rot update an existing card
