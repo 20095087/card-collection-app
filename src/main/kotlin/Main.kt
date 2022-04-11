@@ -4,11 +4,14 @@ import mu.KotlinLogging
 import utils.ScannerInput.readNextLine
 import controllers.CardAPI
 import models.Card
+import persistence.XMLSerializer
 import utils.ScannerInput.readNextInt
+import java.io.File
 
 
 // variables
 private val logger = KotlinLogging.logger {}
+private val cardAPI = CardAPI(XMLSerializer(File("notes.xml")))
 
 fun main(args: Array<String>) {
     // here we will load the files

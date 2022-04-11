@@ -1,4 +1,0 @@
-package persistence
-
-class JSONSerializer {
-}
