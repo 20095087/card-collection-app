@@ -14,6 +14,17 @@ class CardAPI (serializerType: Serializer){
         return cards.add(card)
     }
 
+    fun listAllCards(): String =
+        if(cards.isEmpty()) "No cards stored"
+        else formatListString(cards)
+
+    // this function formats the cards
+    // we created this function so we would not repeat ourselves
+    fun formatListString(cardsToFormat : List<Card>) : String =
+        cardsToFormat
+            .joinToString (separator = "\n") { card ->
+                cards.indexOf(card).toString() + ": " + card.toString() }
+
     // this function loads the cards
     @Throws(Exception::class)
     fun load() {
