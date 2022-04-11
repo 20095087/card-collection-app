@@ -32,20 +32,20 @@ class CardAPI (serializerType: Serializer){
         return cards.size
     }
 
-    fun updateCard(indexToUpdate: Int, note: Card?): Boolean {
-        //find the note object by the index number
-        val foundNote = findCard(indexToUpdate)
+    fun updateCard(indexToUpdate: Int, card: Card?): Boolean {
+        //find the card object by the index number
+        val foundCard = findCard(indexToUpdate)
 
-        //if the note exists, use the note details passed as parameters to update the found note in the ArrayList.
-        if ((foundNote != null) && (note != null)) {
-            foundNote.name = note.name
-            foundNote.cardNum = note.cardNum
-            foundNote.rarity = note.rarity
-            foundNote.quality = note.quality
+        //if the note exists, use the card details passed as parameters to update the found card in the ArrayList.
+        if ((foundCard != null) && (card != null)) {
+            foundCard.name = card.name
+            foundCard.cardNum = card.cardNum
+            foundCard.rarity = card.rarity
+            foundCard.quality = card.quality
             return true
         }
 
-        //if the note was not found, return false, indicating that the update was not successful
+        //if the card was not found, return false, indicating that the update was not successful
         return false
     }
 
