@@ -83,7 +83,7 @@ fun addCard(){
 
 // this function will allow the use rot update an existing card
 fun updateCard(){
-//    logger.info { "updateCard() function invoked" }
+    //    logger.info { "updateCard() function invoked" }
     listAllCards()
     if (cardAPI.numberOfCards() > 0) {
         //only ask the user to choose the card if notes exist
@@ -103,18 +103,18 @@ fun updateCard(){
             rarity = readNextLine("Enter card rarity: ")
         }
         // get the user to enter the status of the note
-        var quality = readNextInt("Enter card quality: ")
+        var quality = readNextInt("Enter card quality(0 to 10): ")
         // validate if the quality if quality is in range
         while(!Utilities.validRange(quality,0,10)) {
+            // if the quality is in-correct then ask user for input again
+            quality = readNextInt("Enter card quality(0 to 10): ")
             // if the quality is within range
             if(Utilities.validRange(quality,0,10)){
                 break
             }
-            // if the quality is in-correct then ask user for input again
-            quality = readNextInt("Enter card quality: ")
         }
 
-        //pass the index of the note and the new note details to NoteAPI for updating and check for success.
+        //pass the index of the card and the new card details to CardAPI for updating and check for success.
         if (cardAPI.updateCard(indexToUpdate, Card(cardName, cardNum, rarity, quality))){
             println("Update Successful")
         } else {
