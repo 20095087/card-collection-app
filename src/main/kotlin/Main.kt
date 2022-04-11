@@ -67,15 +67,30 @@ fun runMenu(){
 fun addCard(){
     //logger.info{"addCard() function invoked"}
     // getting the user to enter the card name
-    val cardName = readNextLine("Enter card name: ")
+    val name = readNextLine("Enter card name: ")
     // getting the user to enter the card number
     val cardNum = readNextInt("Enter card number: ")
     // getting the user to enter the rarity of the card
-    val cardRarity = readNextLine("Enter card rarity: ")
+    var rarity = readNextLine("Enter card rarity \n (common, uncommon,rare,very rare, ultra rare): ")
+    // validate if the rarity is one of the allowed categories
+    while(!rarity.equals("common" ) || !rarity.equals("uncommon") || !rarity.equals("rare") || !rarity.equals("very rare") || !rarity.equals("ultra rare")) {
+        // if the category is correct then break out of the while loop
+        if(rarity.equals("common") || rarity.equals("uncommon") || rarity.equals("rare") || rarity.equals("very rare") || rarity.equals("ultra rare")){
+            break
+        }
+        rarity = readNextLine("Enter card rarity \n (common, uncommon,rare,very rare, ultra rare): ")
+    }
     // getting the user to enter card quality between 1-10
-    val cardQuality = readNextInt("Enter the card quality: ")
-
-    val isAdded = cardAPI.add(Card(cardName,cardNum,cardRarity,cardQuality))
+    var quality = readNextInt("Enter the card quality(0 to 10): ")
+    while(!Utilities.validRange(quality,1,10)) {
+        // if the quality is in-correct then ask user for input again
+        quality = readNextInt("Enter card quality(0 to 10): ")
+        // if the quality is within range
+        if(Utilities.validRange(quality,1,10)){
+            break
+        }
+    }
+    val isAdded = cardAPI.add(Card(name,cardNum,rarity,quality))
     if(isAdded) println("Added Successfully")
     else println("Add Failed")
 
@@ -93,14 +108,14 @@ fun updateCard(){
         // get the user to enter the card number of the card
         var cardNum = readNextInt("Enter card number: ")
         // get the user to enter the card rarity
-        var rarity = readNextLine("Enter card rarity: ")
-        // validate if the category is one of the allowed categories
+        var rarity = readNextLine("Enter card rarity \n (common, uncommon,rare,very rare, ultra rare): ")
+        // validate if the rarity is one of the allowed categories
         while(!rarity.equals("common" ) || !rarity.equals("uncommon") || !rarity.equals("rare") || !rarity.equals("very rare") || !rarity.equals("ultra rare")) {
             // if the category is correct then break out of the while loop
             if(rarity.equals("common") || rarity.equals("uncommon") || rarity.equals("rare") || rarity.equals("very rare") || rarity.equals("ultra rare")){
                 break
             }
-            rarity = readNextLine("Enter card rarity: ")
+            rarity = readNextLine("Enter card rarity \n (common, uncommon,rare,very rare, ultra rare): ")
         }
         // get the user to enter the status of the note
         var quality = readNextInt("Enter card quality(0 to 10): ")
