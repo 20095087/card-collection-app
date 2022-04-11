@@ -2,6 +2,7 @@ package controllers
 
 import models.Card
 import persistence.Serializer
+import utils.Utilities
 
 class CardAPI (serializerType: Serializer){
     // creating an arraylist of cards
@@ -48,7 +49,11 @@ class CardAPI (serializerType: Serializer){
         return false
     }
 
-
+    fun findCard(index: Int): Card? {
+        return if (Utilities.isValidListIndex(index, cards)) {
+            cards[index]
+        } else null
+    }
 
     // this function loads the cards
     @Throws(Exception::class)
