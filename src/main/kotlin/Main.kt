@@ -11,7 +11,7 @@ import java.io.File
 
 // variables
 private val logger = KotlinLogging.logger {}
-private val cardAPI = CardAPI(XMLSerializer(File("notes.xml")))
+private val cardAPI = CardAPI(XMLSerializer(File("cards.xml")))
 
 fun main(args: Array<String>) {
     // here we will load the files
@@ -27,10 +27,10 @@ fun mainMenu(): Int {
                  > |        CARD COLLECTION APP          |
                  > ---------------------------------------
                  > | MENU                                |
-                 > |   1) Add Album                      |
-                 > |   2) Update Album                   |
-                 > |   3) Delete Album                   |
-                 > |   4) List all Albums                |
+                 > |   1) Add Card                       |
+                 > |   2) Update Card                    |
+                 > |   3) Delete Card                    |
+                 > |   4) List all Cards                 |
                  > ---------------------------------------
                  > |   0) Exit                           |
                  > ---------------------------------------
@@ -74,10 +74,9 @@ fun addCard(){
     // getting the user to enter card quality between 1-10
     val cardQuality = readNextInt("Enter the card quality: ")
 
-    val isAdded = CardAPI.add(Card(cardName,cardNum,cardRarity,cardQuality))
+    val isAdded = cardAPI.add(Card(cardName,cardNum,cardRarity,cardQuality))
     if(isAdded) println("Added Successfully")
     else println("Add Failed")
-
 
 }
 
