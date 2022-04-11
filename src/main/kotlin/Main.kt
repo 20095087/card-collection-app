@@ -8,6 +8,7 @@ private val logger = KotlinLogging.logger {}
 
 
 fun main(args: Array<String>) {
+    // here we will load the files
     runMenu()
 }
 
@@ -44,40 +45,41 @@ fun runMenu(){
             // exit the app
             0 -> exitApp()
             // run addAlbum function
-            1 -> addAlbum()
+            1 -> addCard()
             // run updateAlbum function
-            2 -> updateAlbum()
+            2 -> updateCard()
             // run deleteAlbum function
-            3 -> deleteAlbum()
+            3 -> deleteCard()
             // run listAlbums function
-            4 -> listAlbums()
+            4 -> listCards()
         }
     }while (true)
 }
 
-// this function will allow the user to add a new album
-fun addAlbum(){
-    logger.info{"addAlbum() function invoked"}
+// this function will allow the user to add a new card
+fun addCard(){
+    logger.info{"addCard() function invoked"}
 }
 
-// this function will allow the use rot update an existing album
-fun updateAlbum(){
-    logger.info{"updateAlbum() function invoked"}
+// this function will allow the use rot update an existing card
+fun updateCard(){
+    logger.info{"updateCard() function invoked"}
 }
 
-// this function will allow the user to delete an existing album
+// this function will allow the user to delete an existing card
 // and all the cards inside of it
-fun deleteAlbum(){
-    logger.info{"deleteAlbum() function invoked"}
+fun deleteCard(){
+    logger.info{"deleteCard() function invoked"}
 }
 
-// this function will allow the user to display all the exisitng albums
-fun listAlbums(){
-    logger.info{"listAlbums() function invoked"}
+// this function will allow the user to display all the existing cards
+fun listCards(){
+    logger.info{"listCards() function invoked"}
 }
 
 // this function allows the suer to exit the app
 fun exitApp(){
     logger.info{"exitApp() function invoked"}
+    // here we will also save the files
     exit(0)
 }
