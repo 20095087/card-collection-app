@@ -96,4 +96,25 @@ class CardAPITest {
             assertEquals("rare", populatedCards!!.findCard(4)!!.rarity)
         }
     }
+
+    @Nested
+    inner class ListCards {
+
+        @Test
+        fun `listAllCards returns No Cards Stored message when ArrayList is empty`() {
+            assertEquals(0, emptyCards!!.numberOfCards())
+            assertTrue(emptyCards!!.listAllCards().lowercase().contains("no cards"))
+        }
+
+        @Test
+        fun `listAllCards returns Cards when ArrayList has cards stored`() {
+            assertEquals(5, populatedCards!!.numberOfCards())
+            val cardsString = populatedCards!!.listAllCards().lowercase()
+            assertTrue(cardsString.contains("ronaldo"))
+            assertTrue(cardsString.contains("kobe"))
+            assertTrue(cardsString.contains("pikachu"))
+            assertTrue(cardsString.contains("sidney crosby"))
+            assertTrue(cardsString.contains("barry bonds"))
+        }
+    }
 }
