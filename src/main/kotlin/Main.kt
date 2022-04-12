@@ -17,6 +17,7 @@ private val cardAPI = CardAPI(XMLSerializer(File("cards.xml")))
 
 fun main(args: Array<String>) {
     // here we will load the files
+    //load()
     runMenu()
 }
 
@@ -136,7 +137,6 @@ fun updateCard(){
         } else {
             println("Update Failed")
         }
-
     } else {
         println("There are no cards for this index number")
     }
@@ -145,7 +145,21 @@ fun updateCard(){
 // this function will allow the user to delete an existing card
 // and all the cards inside it
 fun deleteCard(){
-    logger.info{"deleteCard() function invoked"}
+    //logger.info{"deleteCard() function invoked"}
+    // list the notes
+    listAllCards()
+    // if there are notes
+    if (cardAPI.numberOfCards() > 0) {
+        //only ask the user to choose the card to delete if card exist
+        val indexToDelete = readNextInt("Enter the index of the card to delete: ")
+        //pass the index of the card to CardAPI for deleting and check for success.
+        val cardToDelete = cardAPI.deleteCard(indexToDelete)
+        if (cardToDelete != null) {
+            println("Delete Successful! Deleted card: ${cardToDelete.noteTitle}")
+        } else {
+            println("Delete NOT Successful")
+        }
+    }
 }
 
 // this function will allow the user to display all the existing cards
@@ -160,5 +174,6 @@ fun listAllCards(){
 fun exitApp(){
     logger.info{"exitApp() function invoked"}
     // here we will also save the files
+    //save()
     exit(0)
 }
