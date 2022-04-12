@@ -11,7 +11,7 @@ The user will be able to update and delete either an album or card(s) in the alb
 - save 
 - load
 
-#Future features
+# Future features
 - add album
 - update album
 - delete album
