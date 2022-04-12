@@ -117,4 +117,23 @@ class CardAPITest {
             assertTrue(cardsString.contains("barry bonds"))
         }
     }
+
+    @Nested
+    inner class DeleteCards {
+        @Test
+        fun `deleting a Card that does not exist, returns null`() {
+            assertNull(emptyCards!!.deleteCard(0))
+            assertNull(populatedCards!!.deleteCard(-1))
+            assertNull(populatedCards!!.deleteCard(5))
+        }
+
+        @Test
+        fun `deleting a card that exists delete and returns deleted object`() {
+            assertEquals(5, populatedCards!!.numberOfCards())
+            assertEquals(baseball, populatedCards!!.deleteCard(4))
+            assertEquals(4, populatedCards!!.numberOfCards())
+            assertEquals(soccer, populatedCards!!.deleteCard(0))
+            assertEquals(3, populatedCards!!.numberOfCards())
+        }
+    }
 }
