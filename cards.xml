@@ -1,0 +1,16 @@
+<object-stream>
+  <list>
+    <models.Card>
+      <name>dd</name>
+      <cardNum>22</cardNum>
+      <rarity>rare</rarity>
+      <quality>6</quality>
+    </models.Card>
+    <models.Card>
+      <name>ee</name>
+      <cardNum>11</cardNum>
+      <rarity>very rare</rarity>
+      <quality>9</quality>
+    </models.Card>
+  </list>
+</object-stream>

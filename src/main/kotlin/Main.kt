@@ -17,7 +17,7 @@ private val cardAPI = CardAPI(XMLSerializer(File("cards.xml")))
 
 fun main(args: Array<String>) {
     // here we will load the files
-    //load()
+    load()
     runMenu()
 }
 
@@ -178,6 +178,17 @@ fun save() {
     } catch (e: Exception) {
         // display exception if one occurs
         System.err.println("Error writing to file: $e")
+    }
+}
+
+// this function calls the load fun from CardAPI
+fun load() {
+    // exception handling not to crash our app
+    try {
+        cardAPI.load()
+    } catch (e: Exception) {
+        // display exception if one occurs
+        System.err.println("Error reading from file: $e")
     }
 }
 
