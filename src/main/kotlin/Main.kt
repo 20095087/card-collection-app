@@ -170,10 +170,21 @@ fun listAllCards(){
     }else println("No cards stored")
 }
 
+// this function calls the store fun from CardAPI
+fun save() {
+    // exception handling not to crash our app
+    try {
+        cardAPI.store()
+    } catch (e: Exception) {
+        // display exception if one occurs
+        System.err.println("Error writing to file: $e")
+    }
+}
+
 // this function allows the suer to exit the app
 fun exitApp(){
     logger.info{"exitApp() function invoked"}
     // here we will also save the files
-    //save()
+    save()
     exit(0)
 }
