@@ -52,7 +52,7 @@ class CardAPITest {
     }
 
     @Nested
-    inner class AddNotes {
+    inner class AddCards {
         @Test
         fun `adding a Card to a populated list adds to ArrayList`() {
             val newNote = Card("Michael Jordan", 56, "ultra rare", 10)
@@ -69,6 +69,31 @@ class CardAPITest {
             assertTrue(emptyCards!!.add(newNote))
             assertEquals(1, emptyCards!!.numberOfCards())
             assertEquals(newNote, emptyCards!!.findCard(emptyCards!!.numberOfCards() - 1))
+        }
+    }
+
+    @Nested
+    inner class UpdateCards {
+        @Test
+        fun `updating a note that does not exist returns false`() {
+            assertFalse(populatedCards!!.updateCard(6, Card("Updating Card", 2, "rare", 2)))
+            assertFalse(populatedCards!!.updateCard(-1, Card("Updating Card", 2, "rare", 3)))
+            assertFalse(emptyCards!!.updateCard(0, Card("Updating Card", 2, "rare", 4)))
+        }
+
+        @Test
+        fun `updating a note that exists returns true and updates`() {
+            //check note 5 exists and check the contents
+            assertEquals(baseball, populatedCards!!.findCard(4))
+            assertEquals("Barry Bonds", populatedCards!!.findCard(4)!!.name)
+            assertEquals(3, populatedCards!!.findCard(4)!!.quality)
+            assertEquals("uncommon", populatedCards!!.findCard(4)!!.rarity)
+
+            //update note 5 with new information and ensure contents updated successfully
+            assertTrue(populatedCards!!.updateCard(4, Card("Updating Note", 2, "rare",2)))
+            assertEquals("Updating Note", populatedCards!!.findCard(4)!!.name)
+            assertEquals(2, populatedCards!!.findCard(4)!!.quality)
+            assertEquals("rare", populatedCards!!.findCard(4)!!.rarity)
         }
     }
 }
