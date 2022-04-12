@@ -1,16 +1,22 @@
 <object-stream>
   <list>
     <models.Card>
-      <name>dd</name>
-      <cardNum>22</cardNum>
+      <name>Ronaldo</name>
+      <cardNum>5</cardNum>
       <rarity>rare</rarity>
       <quality>6</quality>
     </models.Card>
     <models.Card>
-      <name>ee</name>
-      <cardNum>11</cardNum>
-      <rarity>very rare</rarity>
+      <name>Kobe</name>
+      <cardNum>99</cardNum>
+      <rarity>ultra rare</rarity>
       <quality>9</quality>
+    </models.Card>
+    <models.Card>
+      <name>Pikachu</name>
+      <cardNum>4</cardNum>
+      <rarity>common</rarity>
+      <quality>8</quality>
     </models.Card>
   </list>
 </object-stream>

@@ -136,4 +136,42 @@ class CardAPITest {
             assertEquals(3, populatedCards!!.numberOfCards())
         }
     }
+
+    @Test
+    fun `saving and loading an empty collection in XML doesn't crash app`() {
+        // Saving an empty cards.xml file.
+        val storingCards = CardAPI(XMLSerializer(File("cards.xml")))
+        storingCards.store()
+
+        //Loading the empty cards.xml file into a new object
+        val loadedCards = CardAPI(XMLSerializer(File("cards.xml")))
+        loadedCards.load()
+
+        //Comparing the source of the cards (storingCards) with the xml loaded cards (loadedCards)
+        assertEquals(0, storingCards.numberOfCards())
+        assertEquals(0, loadedCards.numberOfCards())
+        assertEquals(storingCards.numberOfCards(), loadedCards.numberOfCards())
+    }
+
+    @Test
+    fun `saving and loading an loaded collection in XML doesn't loose data`() {
+        // Storing 3 cards to the cards.xml file.
+        val storingCards = CardAPI(XMLSerializer(File("cards.xml")))
+        storingCards.add(soccer!!)
+        storingCards.add(basketball!!)
+        storingCards.add(pokemon!!)
+        storingCards.store()
+
+        //Loading cards.xml into a different collection
+        val loadedCards = CardAPI(XMLSerializer(File("cards.xml")))
+        loadedCards.load()
+
+        //Comparing the source of the cards (storingCards) with the xml loaded cards (loadedCards)
+        assertEquals(3, storingCards.numberOfCards())
+        assertEquals(3, loadedCards.numberOfCards())
+        assertEquals(storingCards.numberOfCards(), loadedCards.numberOfCards())
+        assertEquals(storingCards.findCard(0), loadedCards.findCard(0))
+        assertEquals(storingCards.findCard(1), loadedCards.findCard(1))
+        assertEquals(storingCards.findCard(2), loadedCards.findCard(2))
+    }
 }
