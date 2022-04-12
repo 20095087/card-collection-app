@@ -155,7 +155,7 @@ fun deleteCard(){
         //pass the index of the card to CardAPI for deleting and check for success.
         val cardToDelete = cardAPI.deleteCard(indexToDelete)
         if (cardToDelete != null) {
-            println("Delete Successful! Deleted card: ${cardToDelete.noteTitle}")
+            println("Delete Successful! Deleted card: ${cardToDelete.name}")
         } else {
             println("Delete NOT Successful")
         }

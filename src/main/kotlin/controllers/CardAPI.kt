@@ -49,6 +49,16 @@ class CardAPI (serializerType: Serializer){
         return false
     }
 
+    // this function is responsible for deleting a card
+    fun deleteCard(indexToDelete: Int): Card? {
+        // we verify if the index passed in is correct and exists
+        return if (Utilities.isValidListIndex(indexToDelete, cards)) {
+            // finally we remove the card from the arrayList
+            cards.removeAt(indexToDelete)
+        } else null
+    }
+
+    // this function finds the card by its index
     fun findCard(index: Int): Card? {
         return if (Utilities.isValidListIndex(index, cards)) {
             cards[index]
