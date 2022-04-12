@@ -5,6 +5,7 @@ import utils.ScannerInput.readNextLine
 import controllers.CardAPI
 import models.Card
 import persistence.XMLSerializer
+import utils.RarityUtility
 import utils.ScannerInput.readNextInt
 import utils.Utilities
 import java.io.File
@@ -73,20 +74,20 @@ fun addCard(){
     // getting the user to enter the rarity of the card
     var rarity = readNextLine("Enter card rarity \n (common, uncommon,rare,very rare, ultra rare): ")
     // validate if the rarity is one of the allowed categories
-    while(!rarity.equals("common" ) || !rarity.equals("uncommon") || !rarity.equals("rare") || !rarity.equals("very rare") || !rarity.equals("ultra rare")) {
+    while(!RarityUtility.isValidRarity(rarity)) {
         // if the category is correct then break out of the while loop
-        if(rarity.equals("common") || rarity.equals("uncommon") || rarity.equals("rare") || rarity.equals("very rare") || rarity.equals("ultra rare")){
+        if(RarityUtility.isValidRarity(rarity)){
             break
         }
         rarity = readNextLine("Enter card rarity \n (common, uncommon,rare,very rare, ultra rare): ")
     }
     // getting the user to enter card quality between 1-10
-    var quality = readNextInt("Enter the card quality(0 to 10): ")
-    while(!Utilities.validRange(quality,1,10)) {
+    var quality = readNextInt("Enter card quality(0 to 10): ")
+    while(!Utilities.validRange(quality,0,10)) {
         // if the quality is in-correct then ask user for input again
         quality = readNextInt("Enter card quality(0 to 10): ")
         // if the quality is within range
-        if(Utilities.validRange(quality,1,10)){
+        if(Utilities.validRange(quality,0,10)){
             break
         }
     }
@@ -110,9 +111,9 @@ fun updateCard(){
         // get the user to enter the card rarity
         var rarity = readNextLine("Enter card rarity \n (common, uncommon,rare,very rare, ultra rare): ")
         // validate if the rarity is one of the allowed categories
-        while(!rarity.equals("common" ) || !rarity.equals("uncommon") || !rarity.equals("rare") || !rarity.equals("very rare") || !rarity.equals("ultra rare")) {
+        while(!RarityUtility.isValidRarity(rarity)) {
             // if the category is correct then break out of the while loop
-            if(rarity.equals("common") || rarity.equals("uncommon") || rarity.equals("rare") || rarity.equals("very rare") || rarity.equals("ultra rare")){
+            if(RarityUtility.isValidRarity(rarity)){
                 break
             }
             rarity = readNextLine("Enter card rarity \n (common, uncommon,rare,very rare, ultra rare): ")
