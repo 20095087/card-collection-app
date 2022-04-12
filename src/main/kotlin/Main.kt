@@ -174,6 +174,7 @@ fun listAllCards(){
 fun save() {
     // exception handling not to crash our app
     try {
+        // calls store function from CardAPI
         cardAPI.store()
     } catch (e: Exception) {
         // display exception if one occurs
@@ -185,6 +186,7 @@ fun save() {
 fun load() {
     // exception handling not to crash our app
     try {
+        // calls load function from CardAPI
         cardAPI.load()
     } catch (e: Exception) {
         // display exception if one occurs
@@ -194,7 +196,7 @@ fun load() {
 
 // this function allows the suer to exit the app
 fun exitApp(){
-    logger.info{"exitApp() function invoked"}
+    //logger.info{"exitApp() function invoked"}
     // here we will also save the files
     save()
     exit(0)
