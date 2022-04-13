@@ -170,6 +170,35 @@ fun listAllCards(){
     }else println("No cards stored")
 }
 
+// search by rarity function
+// this function prints a sub-menu which the user can chose from
+fun searchByRarity() {
+    // if there are notes
+    if (cardAPI.numberOfCards() > 0) {
+        val option = readNextInt(
+            """
+                  > --------------------------------
+                  > |   1) common                  |
+                  > |   2) uncommon                |
+                  > |   3) rare                    |
+                  > |   4) very rare               |
+                  > |   5) ultra rare              |
+                  > --------------------------------
+         > ==>> """.trimMargin(">"))
+
+        when (option) {
+            1 -> cardAPI.searchByRarity("common")
+            2 -> cardAPI.searchByRarity("uncommon")
+            3 -> cardAPI.searchByRarity("rare")
+            4 -> cardAPI.searchByRarity("very rare")
+            5 -> cardAPI.searchByRarity("ultra rare")
+            else -> println("Invalid option entered: " + option)
+        }
+    } else {
+        println("Option Invalid - No notes stored");
+    }
+}
+
 // this function calls the store fun from CardAPI
 fun save() {
     // exception handling not to crash our app
