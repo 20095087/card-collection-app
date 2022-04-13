@@ -36,6 +36,7 @@ fun mainMenu(): Int {
                  > |   4) List all Cards                 |
                  > ---------------------------------------
                  > |   5) Search by Rarity               |
+                 > |   6) Search by Name                 |
                  > ---------------------------------------
                  > |   0) Exit                           |
                  > ---------------------------------------
@@ -65,6 +66,8 @@ fun runMenu(){
             4 -> listAllCards()
             // run searchByRarity function
             5 -> searchByRarity()
+            // run searchByName function
+            6 -> searchByRarity()
         }
     }while (true)
 }
