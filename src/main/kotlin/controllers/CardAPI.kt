@@ -71,6 +71,12 @@ class CardAPI (serializerType: Serializer){
         cards.filter { card -> card.rarity.equals(rarity, ignoreCase = true)}
             .joinToString(separator = "\n") { card -> cards.indexOf(card).toString() + ": " + card.toString()  }
 
+    // this function looks through the cards and displays cards with
+    // the corresponding name.
+    fun searchByName(name: String) =
+        cards.filter { card -> card.name.contains(name, ignoreCase = true)}
+            .joinToString(separator = "\n") { card -> cards.indexOf(card).toString() + ": " + card.toString()  }
+
     // this function loads the cards
     @Throws(Exception::class)
     fun load() {
