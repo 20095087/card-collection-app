@@ -35,6 +35,8 @@ fun mainMenu(): Int {
                  > |   3) Delete Card                    |
                  > |   4) List all Cards                 |
                  > ---------------------------------------
+                 > |   5) Search by Rarity               |
+                 > ---------------------------------------
                  > |   0) Exit                           |
                  > ---------------------------------------
     ==>>""".trimMargin(">")
@@ -61,6 +63,8 @@ fun runMenu(){
             3 -> deleteCard()
             // run listAlbums function
             4 -> listAllCards()
+            // run searchByRarity function
+            5 -> searchByRarity()
         }
     }while (true)
 }
@@ -171,9 +175,9 @@ fun listAllCards(){
 }
 
 // search by rarity function
-// this function prints a sub-menu which the user can chose from
+// this function prints a sub-menu which the user can choose from
 fun searchByRarity() {
-    // if there are notes
+    // if there are cards
     if (cardAPI.numberOfCards() > 0) {
         val option = readNextInt(
             """
@@ -187,11 +191,11 @@ fun searchByRarity() {
          > ==>> """.trimMargin(">"))
 
         when (option) {
-            1 -> cardAPI.searchByRarity("common")
-            2 -> cardAPI.searchByRarity("uncommon")
-            3 -> cardAPI.searchByRarity("rare")
-            4 -> cardAPI.searchByRarity("very rare")
-            5 -> cardAPI.searchByRarity("ultra rare")
+            1 -> println(cardAPI.searchByRarity("common"))
+            2 -> println(cardAPI.searchByRarity("uncommon"))
+            3 -> println(cardAPI.searchByRarity("rare"))
+            4 -> println(cardAPI.searchByRarity("very rare"))
+            5 -> println(cardAPI.searchByRarity("ultra rare"))
             else -> println("Invalid option entered: " + option)
         }
     } else {
