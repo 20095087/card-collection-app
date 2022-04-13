@@ -137,6 +137,36 @@ class CardAPITest {
         }
     }
 
+    @Nested
+    inner class SearchMethods{
+        @Test
+        fun `search card by rarity returns no cards when no cards with that rarity exist`(){
+            // searching a populated collection for a rarity that does not exist
+            assertEquals(5,populatedCards!!.numberOfCards())
+            val searchResults = populatedCards!!.searchByRarity("no result expected")
+            assertTrue(searchResults.isEmpty())
+
+            // searching an empty collection
+            assertEquals(0,emptyCards!!.numberOfCards())
+            assertTrue(emptyCards!!.searchByRarity("").isEmpty())
+        }
+
+        @Test
+        fun `search cards by rarity returns cards when card with that rarity exist`(){
+            assertEquals(5,populatedCards!!.numberOfCards())
+
+            // searching a populated collection for rarity that exists
+            var searchResults = populatedCards!!.searchByRarity("rare")
+            assertTrue(searchResults.contains("rare"))
+            assertFalse(searchResults.contains("ultra rare"))
+
+            // searching a populated collection for a rarity that case don't match
+            searchResults = populatedCards!!.searchByRarity("rARe")
+            assertTrue(searchResults.contains("rare"))
+            assertFalse(searchResults.contains("uncommon"))
+        }
+    }
+
     @Test
     fun `saving and loading an empty collection in XML doesn't crash app`() {
         // Saving an empty cards.xml file.
