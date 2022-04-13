@@ -33,10 +33,9 @@ fun mainMenu(): Int {
                  > |   1) Add Card                       |
                  > |   2) Update Card                    |
                  > |   3) Delete Card                    |
-                 > |   4) List all Cards                 |
+                 > |   4) List Cards                     |
                  > ---------------------------------------
-                 > |   5) Search by Rarity               |
-                 > |   6) Search by Name                 |
+                 > |   5) Search by Name                 |
                  > ---------------------------------------
                  > |   0) Exit                           |
                  > ---------------------------------------
@@ -63,11 +62,9 @@ fun runMenu(){
             // run deleteAlbum function
             3 -> deleteCard()
             // run listAlbums function
-            4 -> listAllCards()
-            // run searchByRarity function
-            5 -> searchByRarity()
+            4 -> listCards()
             // run searchByName function
-            6 -> searchByName()
+            5 -> searchByName()
         }
     }while (true)
 }
@@ -177,9 +174,42 @@ fun listAllCards(){
     }else println("No cards stored")
 }
 
-// search by rarity function
+fun listCards() {
+    // if there are notes
+    if (cardAPI.numberOfCards() > 0) {
+        val option = readNextInt(
+            """
+                  > --------------------------------
+                  > |   1) View ALL cards          |
+                  > |   2) View by quality         |
+                  > |   3) View by rarity          |
+                  > --------------------------------
+         > ==>> """.trimMargin(">"))
+
+        when (option) {
+            1 -> listAllCards();
+            2 -> listByQuality();
+            3 -> listByRarity();
+            else -> println("Invalid option entered: " + option)
+        }
+    } else {
+        println("Option Invalid - No cards stored");
+    }
+}
+
+// this function is responsible for displaying cards by quality
+fun listByQuality(){
+    // if there are any cards
+    if(cardAPI.numberOfCards() > 0){
+        // getting the quality from the user
+        val quality = ScannerInput.readNextInt("Enter quality (1-10): ")
+        println(cardAPI.listByQuality(quality))
+    }
+}
+
+// list by rarity function
 // this function prints a sub-menu which the user can choose from
-fun searchByRarity() {
+fun listByRarity() {
     // if there are cards
     if (cardAPI.numberOfCards() > 0) {
         val option = readNextInt(
@@ -194,11 +224,11 @@ fun searchByRarity() {
          > ==>> """.trimMargin(">"))
 
         when (option) {
-            1 -> println(cardAPI.searchByRarity("common"))
-            2 -> println(cardAPI.searchByRarity("uncommon"))
-            3 -> println(cardAPI.searchByRarity("rare"))
-            4 -> println(cardAPI.searchByRarity("very rare"))
-            5 -> println(cardAPI.searchByRarity("ultra rare"))
+            1 -> println(cardAPI.listByRarity("common"))
+            2 -> println(cardAPI.listByRarity("uncommon"))
+            3 -> println(cardAPI.listByRarity("rare"))
+            4 -> println(cardAPI.listByRarity("very rare"))
+            5 -> println(cardAPI.listByRarity("ultra rare"))
             else -> println("Invalid option entered: " + option)
         }
     } else {
@@ -208,7 +238,7 @@ fun searchByRarity() {
 
 fun searchByName(){
     var name = ScannerInput.readNextLine("Enter card name: ")
-    println(cardAPI.searchByName(name))
+    println(cardAPI.listByName(name))
 }
 
 // this function calls the store fun from CardAPI

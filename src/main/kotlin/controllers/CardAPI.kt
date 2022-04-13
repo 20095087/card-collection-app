@@ -77,6 +77,12 @@ class CardAPI (serializerType: Serializer){
         cards.filter { card -> card.name.contains(name, ignoreCase = true)}
             .joinToString(separator = "\n") { card -> cards.indexOf(card).toString() + ": " + card.toString()  }
 
+    // this function looks through the cards and displays cards with
+    // the corresponding quality
+    fun listByQuality(quality: Int): String =
+        if(cards.isEmpty()) "No cards stored."
+        else cards.filter { card -> card.quality == quality }.joinToString(separator = "\n") { card -> cards.indexOf(card).toString() + ": " + card.toString() }
+
     // this function loads the cards
     @Throws(Exception::class)
     fun load() {
