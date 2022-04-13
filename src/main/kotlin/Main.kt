@@ -35,6 +35,8 @@ fun mainMenu(): Int {
                  > |   3) Delete Card                    |
                  > |   4) List all Cards                 |
                  > ---------------------------------------
+                 > |   5) Search by Rarity               |
+                 > ---------------------------------------
                  > |   0) Exit                           |
                  > ---------------------------------------
     ==>>""".trimMargin(">")
@@ -61,6 +63,8 @@ fun runMenu(){
             3 -> deleteCard()
             // run listAlbums function
             4 -> listAllCards()
+            // run searchByRarity function
+            5 -> searchByRarity()
         }
     }while (true)
 }
@@ -168,6 +172,35 @@ fun listAllCards(){
     if(cardAPI.numberOfCards() > 0){
         println(cardAPI.listAllCards())
     }else println("No cards stored")
+}
+
+// search by rarity function
+// this function prints a sub-menu which the user can choose from
+fun searchByRarity() {
+    // if there are cards
+    if (cardAPI.numberOfCards() > 0) {
+        val option = readNextInt(
+            """
+                  > --------------------------------
+                  > |   1) common                  |
+                  > |   2) uncommon                |
+                  > |   3) rare                    |
+                  > |   4) very rare               |
+                  > |   5) ultra rare              |
+                  > --------------------------------
+         > ==>> """.trimMargin(">"))
+
+        when (option) {
+            1 -> println(cardAPI.searchByRarity("common"))
+            2 -> println(cardAPI.searchByRarity("uncommon"))
+            3 -> println(cardAPI.searchByRarity("rare"))
+            4 -> println(cardAPI.searchByRarity("very rare"))
+            5 -> println(cardAPI.searchByRarity("ultra rare"))
+            else -> println("Invalid option entered: " + option)
+        }
+    } else {
+        println("Option Invalid - No notes stored");
+    }
 }
 
 // this function calls the store fun from CardAPI

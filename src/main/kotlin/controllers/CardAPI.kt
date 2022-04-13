@@ -65,6 +65,12 @@ class CardAPI (serializerType: Serializer){
         } else null
     }
 
+    // this function looks through the cards and displays cards with
+    // the corresponding rarity
+    fun searchByRarity(rarity: String) =
+        cards.filter { card -> card.rarity.equals(rarity, ignoreCase = true)}
+            .joinToString(separator = "\n") { card -> cards.indexOf(card).toString() + ": " + card.toString()  }
+
     // this function loads the cards
     @Throws(Exception::class)
     fun load() {
