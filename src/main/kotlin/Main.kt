@@ -35,8 +35,7 @@ fun mainMenu(): Int {
                  > |   3) Delete Card                    |
                  > |   4) List Cards                     |
                  > ---------------------------------------
-                 > |   5) Search by Rarity               |
-                 > |   6) Search by Name                 |
+                 > |   5) Search by Name                 |
                  > ---------------------------------------
                  > |   0) Exit                           |
                  > ---------------------------------------
@@ -64,10 +63,8 @@ fun runMenu(){
             3 -> deleteCard()
             // run listAlbums function
             4 -> listCards()
-            // run searchByRarity function
-            5 -> searchByRarity()
             // run searchByName function
-            6 -> searchByName()
+            5 -> searchByName()
         }
     }while (true)
 }
@@ -185,12 +182,14 @@ fun listCards() {
                   > --------------------------------
                   > |   1) View ALL cards          |
                   > |   2) View by quality         |
+                  > |   3) View by rarity          |
                   > --------------------------------
          > ==>> """.trimMargin(">"))
 
         when (option) {
             1 -> listAllCards();
             2 -> listByQuality();
+            3 -> listByRarity();
             else -> println("Invalid option entered: " + option)
         }
     } else {
@@ -198,9 +197,19 @@ fun listCards() {
     }
 }
 
-// search by rarity function
+// this function is responsible for displaying cards by quality
+fun listByQuality(){
+    // if there are any cards
+    if(cardAPI.numberOfCards() > 0){
+        // getting the quality from the user
+        val quality = ScannerInput.readNextInt("Enter quality (1-10): ")
+        println(cardAPI.listByQuality(quality))
+    }
+}
+
+// list by rarity function
 // this function prints a sub-menu which the user can choose from
-fun searchByRarity() {
+fun listByRarity() {
     // if there are cards
     if (cardAPI.numberOfCards() > 0) {
         val option = readNextInt(
