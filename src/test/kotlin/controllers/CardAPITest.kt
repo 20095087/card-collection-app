@@ -116,6 +116,56 @@ class CardAPITest {
             assertTrue(cardsString.contains("sidney crosby"))
             assertTrue(cardsString.contains("barry bonds"))
         }
+
+        @Test
+        fun `listByName returns No cards when ArrayList is empty`() {
+            assertEquals(0, emptyCards!!.numberOfCards())
+            assertTrue(emptyCards!!.listByName("").lowercase().contains("")
+            )
+        }
+
+        @Test
+        fun `listByName returns no cards when no cards of that name exist`() {
+            assertEquals(5, populatedCards!!.numberOfCards())
+            val nameToString = populatedCards!!.listByName("awdaw").lowercase()
+            assertFalse(nameToString.contains("awdaw"))
+        }
+
+        @Test
+        fun `listByName returns all card that match that name when cards of that name exist`() {
+            assertEquals(5, populatedCards!!.numberOfCards())
+            val nameToString2 = populatedCards!!.listByName("Ronaldo").lowercase()
+            assertTrue(nameToString2.contains("r"))
+            assertTrue(nameToString2.contains("aldo"))
+            assertFalse(nameToString2.contains("bob"))
+            assertFalse(nameToString2.contains("john"))
+            assertFalse(nameToString2.contains("jack"))
+
+            val nameToString3 = populatedCards!!.listByName("Pikachu").lowercase(Locale.getDefault())
+            assertTrue(nameToString3.contains("achu"))
+            assertFalse(nameToString3.contains("bob"))
+            assertTrue(nameToString3.contains("p"))
+            assertFalse(nameToString3.contains("john"))
+        }
+
+        @Test
+        fun `list card by quality returns no cards when no cards with that quality exist`(){
+            // searching a populated collection for a quality that does not exist
+            assertEquals(5, populatedCards!!.numberOfCards())
+            val quality2String = populatedCards!!.listByQuality(3).lowercase()
+            assertFalse(quality2String.contains("2"))
+        }
+
+        @Test
+        fun `list cards by quality returns cards when card with that quality exist`(){
+            assertEquals(5,populatedCards!!.numberOfCards())
+
+            // searching a populated collection for quality that exists
+            var searchResults = populatedCards!!.listByQuality(9)
+            assertTrue(searchResults.contains("9"))
+            assertFalse(searchResults.contains("7"))
+
+        }
     }
 
     @Nested
@@ -143,12 +193,12 @@ class CardAPITest {
         fun `search card by rarity returns no cards when no cards with that rarity exist`(){
             // searching a populated collection for a rarity that does not exist
             assertEquals(5,populatedCards!!.numberOfCards())
-            val searchResults = populatedCards!!.searchByRarity("no result expected")
+            val searchResults = populatedCards!!.listByRarity("no result expected")
             assertTrue(searchResults.isEmpty())
 
             // searching an empty collection
             assertEquals(0,emptyCards!!.numberOfCards())
-            assertTrue(emptyCards!!.searchByRarity("").isEmpty())
+            assertTrue(emptyCards!!.listByRarity("").isEmpty())
         }
 
         @Test
@@ -156,12 +206,12 @@ class CardAPITest {
             assertEquals(5,populatedCards!!.numberOfCards())
 
             // searching a populated collection for rarity that exists
-            var searchResults = populatedCards!!.searchByRarity("rare")
+            var searchResults = populatedCards!!.listByRarity("rare")
             assertTrue(searchResults.contains("rare"))
             assertFalse(searchResults.contains("ultra rare"))
 
             // searching a populated collection for a rarity that case don't match
-            searchResults = populatedCards!!.searchByRarity("rARe")
+            searchResults = populatedCards!!.listByRarity("rARe")
             assertTrue(searchResults.contains("rare"))
             assertFalse(searchResults.contains("uncommon"))
         }
@@ -170,12 +220,12 @@ class CardAPITest {
         fun `search cards by name returns no cards when no cards with that name exist`(){
             // searching a populated collection for a name that does not exist
             assertEquals(5,populatedCards!!.numberOfCards())
-            val searchResults = populatedCards!!.searchByName("no result expected")
+            val searchResults = populatedCards!!.listByName("no result expected")
             assertTrue(searchResults.isEmpty())
 
             // searching an empty collection
             assertEquals(0,emptyCards!!.numberOfCards())
-            assertTrue(emptyCards!!.searchByName("").isEmpty())
+            assertTrue(emptyCards!!.listByName("").isEmpty())
         }
 
         @Test
@@ -183,17 +233,17 @@ class CardAPITest {
             assertEquals(5,populatedCards!!.numberOfCards())
 
             // searching a populated collection for a full name that exists
-            var searchResults = populatedCards!!.searchByName("Kobe")
+            var searchResults = populatedCards!!.listByName("Kobe")
             assertTrue(searchResults.contains("Kobe"))
             assertFalse(searchResults.contains("Bob"))
 
             // searching a populated collection for a partial name that exists
-            searchResults = populatedCards!!.searchByName("Ron")
+            searchResults = populatedCards!!.listByName("Ron")
             assertTrue(searchResults.contains("Ronaldo"))
             assertFalse(searchResults.contains("Bob"))
 
             // searching a populated collection for a partial name that exists but case dont match
-            searchResults = populatedCards!!.searchByName("piKa")
+            searchResults = populatedCards!!.listByName("piKa")
             assertTrue(searchResults.contains("Pikachu"))
             assertFalse(searchResults.contains("pokachoo"))
         }

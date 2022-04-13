@@ -224,11 +224,11 @@ fun listByRarity() {
          > ==>> """.trimMargin(">"))
 
         when (option) {
-            1 -> println(cardAPI.searchByRarity("common"))
-            2 -> println(cardAPI.searchByRarity("uncommon"))
-            3 -> println(cardAPI.searchByRarity("rare"))
-            4 -> println(cardAPI.searchByRarity("very rare"))
-            5 -> println(cardAPI.searchByRarity("ultra rare"))
+            1 -> println(cardAPI.listByRarity("common"))
+            2 -> println(cardAPI.listByRarity("uncommon"))
+            3 -> println(cardAPI.listByRarity("rare"))
+            4 -> println(cardAPI.listByRarity("very rare"))
+            5 -> println(cardAPI.listByRarity("ultra rare"))
             else -> println("Invalid option entered: " + option)
         }
     } else {
@@ -238,7 +238,7 @@ fun listByRarity() {
 
 fun searchByName(){
     var name = ScannerInput.readNextLine("Enter card name: ")
-    println(cardAPI.searchByName(name))
+    println(cardAPI.listByName(name))
 }
 
 // this function calls the store fun from CardAPI
