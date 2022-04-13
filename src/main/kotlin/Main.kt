@@ -33,7 +33,7 @@ fun mainMenu(): Int {
                  > |   1) Add Card                       |
                  > |   2) Update Card                    |
                  > |   3) Delete Card                    |
-                 > |   4) List all Cards                 |
+                 > |   4) List Cards                     |
                  > ---------------------------------------
                  > |   5) Search by Rarity               |
                  > |   6) Search by Name                 |
@@ -63,7 +63,7 @@ fun runMenu(){
             // run deleteAlbum function
             3 -> deleteCard()
             // run listAlbums function
-            4 -> listAllCards()
+            4 -> listCards()
             // run searchByRarity function
             5 -> searchByRarity()
             // run searchByName function
@@ -175,6 +175,27 @@ fun listAllCards(){
     if(cardAPI.numberOfCards() > 0){
         println(cardAPI.listAllCards())
     }else println("No cards stored")
+}
+
+fun listCards() {
+    // if there are notes
+    if (cardAPI.numberOfCards() > 0) {
+        val option = readNextInt(
+            """
+                  > --------------------------------
+                  > |   1) View ALL cards          |
+                  > |   2) View by quality         |
+                  > --------------------------------
+         > ==>> """.trimMargin(">"))
+
+        when (option) {
+            1 -> listAllCards();
+            2 -> listByQuality();
+            else -> println("Invalid option entered: " + option)
+        }
+    } else {
+        println("Option Invalid - No cards stored");
+    }
 }
 
 // search by rarity function
