@@ -67,7 +67,7 @@ fun runMenu(){
             // run searchByRarity function
             5 -> searchByRarity()
             // run searchByName function
-            6 -> searchByRarity()
+            6 -> searchByName()
         }
     }while (true)
 }
@@ -202,8 +202,13 @@ fun searchByRarity() {
             else -> println("Invalid option entered: " + option)
         }
     } else {
-        println("Option Invalid - No notes stored");
+        println("Option Invalid - No cards stored");
     }
+}
+
+fun searchByName(){
+    var name = ScannerInput.readNextLine("Enter card name: ")
+    println(cardAPI.searchByName(name))
 }
 
 // this function calls the store fun from CardAPI
