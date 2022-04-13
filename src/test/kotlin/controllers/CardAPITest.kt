@@ -165,6 +165,38 @@ class CardAPITest {
             assertTrue(searchResults.contains("rare"))
             assertFalse(searchResults.contains("uncommon"))
         }
+
+        @Test
+        fun `search cards by name returns no cards when no cards with that name exist`(){
+            // searching a populated collection for a name that does not exist
+            assertEquals(5,populatedCards!!.numberOfCards())
+            val searchResults = populatedCards!!.searchByName("no result expected")
+            assertTrue(searchResults.isEmpty())
+
+            // searching an empty collection
+            assertEquals(0,emptyCards!!.numberOfCards())
+            assertTrue(emptyCards!!.searchByName("").isEmpty())
+        }
+
+        @Test
+        fun `search cards by name returns cards when cards with that name exist`(){
+            assertEquals(5,populatedCards!!.numberOfCards())
+
+            // searching a populated collection for a full name that exists
+            var searchResults = populatedCards!!.searchByName("Kobe")
+            assertTrue(searchResults.contains("Kobe"))
+            assertFalse(searchResults.contains("Bob"))
+
+            // searching a populated collection for a partial name that exists
+            searchResults = populatedCards!!.searchByName("Ron")
+            assertTrue(searchResults.contains("Ronaldo"))
+            assertFalse(searchResults.contains("Bob"))
+
+            // searching a populated collection for a partial name that exists but case dont match
+            searchResults = populatedCards!!.searchByName("piKa")
+            assertTrue(searchResults.contains("Pikachu"))
+            assertFalse(searchResults.contains("pokachoo"))
+        }
     }
 
     @Test
