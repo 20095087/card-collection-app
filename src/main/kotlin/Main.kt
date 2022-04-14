@@ -36,6 +36,8 @@ fun mainMenu(): Int {
                  > |   4) List Cards                     |
                  > ---------------------------------------
                  > |   5) Search by Name                 |
+                 > |   6) Number of Cards                |
+                 > |   7) Number of Cards by Rarity      |
                  > ---------------------------------------
                  > |   0) Exit                           |
                  > ---------------------------------------
@@ -65,6 +67,10 @@ fun runMenu(){
             4 -> listCards()
             // run searchByName function
             5 -> searchByName()
+            // run numberOfCards function
+            6 -> numberOfCards()
+            // run numberOfCardsByRarity function
+            7 -> numberOfCardsByRarity()
         }
     }while (true)
 }
@@ -234,6 +240,11 @@ fun listByRarity() {
     } else {
         println("Option Invalid - No cards stored");
     }
+}
+
+// this function runs the numberOfCards function from cardAPI and prints it to the console.
+fun numberOfCards(){
+    println(cardAPI.numberOfCards())
 }
 
 fun searchByName(){

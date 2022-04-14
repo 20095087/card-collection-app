@@ -120,28 +120,28 @@ class CardAPITest {
         @Test
         fun `listByName returns No cards when ArrayList is empty`() {
             assertEquals(0, emptyCards!!.numberOfCards())
-            assertTrue(emptyCards!!.listByName("").lowercase().contains("")
+            assertTrue(emptyCards!!.searchByName("").lowercase().contains("")
             )
         }
 
         @Test
         fun `listByName returns no cards when no cards of that name exist`() {
             assertEquals(5, populatedCards!!.numberOfCards())
-            val nameToString = populatedCards!!.listByName("awdaw").lowercase()
+            val nameToString = populatedCards!!.searchByName("awdaw").lowercase()
             assertFalse(nameToString.contains("awdaw"))
         }
 
         @Test
         fun `listByName returns all card that match that name when cards of that name exist`() {
             assertEquals(5, populatedCards!!.numberOfCards())
-            val nameToString2 = populatedCards!!.listByName("Ronaldo").lowercase()
+            val nameToString2 = populatedCards!!.searchByName("Ronaldo").lowercase()
             assertTrue(nameToString2.contains("r"))
             assertTrue(nameToString2.contains("aldo"))
             assertFalse(nameToString2.contains("bob"))
             assertFalse(nameToString2.contains("john"))
             assertFalse(nameToString2.contains("jack"))
 
-            val nameToString3 = populatedCards!!.listByName("Pikachu").lowercase(Locale.getDefault())
+            val nameToString3 = populatedCards!!.searchByName("Pikachu").lowercase(Locale.getDefault())
             assertTrue(nameToString3.contains("achu"))
             assertFalse(nameToString3.contains("bob"))
             assertTrue(nameToString3.contains("p"))
@@ -220,12 +220,12 @@ class CardAPITest {
         fun `search cards by name returns no cards when no cards with that name exist`(){
             // searching a populated collection for a name that does not exist
             assertEquals(5,populatedCards!!.numberOfCards())
-            val searchResults = populatedCards!!.listByName("no result expected")
+            val searchResults = populatedCards!!.searchByName("no result expected")
             assertTrue(searchResults.isEmpty())
 
             // searching an empty collection
             assertEquals(0,emptyCards!!.numberOfCards())
-            assertTrue(emptyCards!!.listByName("").isEmpty())
+            assertTrue(emptyCards!!.searchByName("").isEmpty())
         }
 
         @Test
@@ -233,17 +233,17 @@ class CardAPITest {
             assertEquals(5,populatedCards!!.numberOfCards())
 
             // searching a populated collection for a full name that exists
-            var searchResults = populatedCards!!.listByName("Kobe")
+            var searchResults = populatedCards!!.searchByName("Kobe")
             assertTrue(searchResults.contains("Kobe"))
             assertFalse(searchResults.contains("Bob"))
 
             // searching a populated collection for a partial name that exists
-            searchResults = populatedCards!!.listByName("Ron")
+            searchResults = populatedCards!!.searchByName("Ron")
             assertTrue(searchResults.contains("Ronaldo"))
             assertFalse(searchResults.contains("Bob"))
 
             // searching a populated collection for a partial name that exists but case dont match
-            searchResults = populatedCards!!.listByName("piKa")
+            searchResults = populatedCards!!.searchByName("piKa")
             assertTrue(searchResults.contains("Pikachu"))
             assertFalse(searchResults.contains("pokachoo"))
         }
