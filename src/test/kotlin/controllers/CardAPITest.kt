@@ -249,6 +249,34 @@ class CardAPITest {
         }
     }
 
+    @Nested
+    inner class CountingMethods {
+
+        @Test
+        fun numberOfCardsCalculatedCorrectly() {
+            assertEquals(5, populatedCards!!.numberOfCards())
+            assertEquals(0, emptyCards!!.numberOfCards())
+        }
+
+        @Test
+        fun numberOfCardsByRarity() {
+            assertEquals(1, populatedCards!!.numberOfCommons())
+            assertEquals(0, emptyCards!!.numberOfCommons())
+
+            assertEquals(1, populatedCards!!.numberOfUncommons())
+            assertEquals(0, emptyCards!!.numberOfUncommons())
+
+            assertEquals(2, populatedCards!!.numberOfRares())
+            assertEquals(0, emptyCards!!.numberOfRares())
+
+            assertEquals(0, populatedCards!!.numberOfVeryRares())
+            assertEquals(0, emptyCards!!.numberOfVeryRares())
+
+            assertEquals(1, populatedCards!!.numberOfUltraRares())
+            assertEquals(0, emptyCards!!.numberOfUltraRares())
+        }
+    }
+
     @Test
     fun `saving and loading an empty collection in XML doesn't crash app`() {
         // Saving an empty cards.xml file.
