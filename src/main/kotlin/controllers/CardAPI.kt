@@ -4,28 +4,30 @@ import models.Card
 import persistence.Serializer
 import utils.Utilities
 
-class CardAPI (serializerType: Serializer){
+class CardAPI(serializerType: Serializer) {
     // creating an arraylist of cards
     private var cards = ArrayList<Card>()
+
     // getting the serializer class
     private var serializer: Serializer = serializerType
 
     // function for adding cards
-    fun add(card: Card): Boolean{
+    fun add(card: Card): Boolean {
         return cards.add(card)
     }
 
     // this function lists all cards
     fun listAllCards(): String =
-        if(cards.isEmpty()) "No cards stored"
+        if (cards.isEmpty()) "No cards stored"
         else formatListString(cards)
 
     // this function formats the cards
     // we created this function, so we would not repeat ourselves
-    fun formatListString(cardsToFormat : List<Card>) : String =
+    fun formatListString(cardsToFormat: List<Card>): String =
         cardsToFormat
-            .joinToString (separator = "\n") { card ->
-                cards.indexOf(card).toString() + ": " + card.toString() }
+            .joinToString(separator = "\n") { card ->
+                cards.indexOf(card).toString() + ": " + card.toString()
+            }
 
     // returns the amount of cards.
     fun numberOfCards(): Int {
@@ -65,23 +67,48 @@ class CardAPI (serializerType: Serializer){
         } else null
     }
 
+    // this function is responsible for counting cards from all rarities.
+    fun numberOfCardsByRarity(): String {
+        var numOfCardsByRarity =
+            """
+                 >---------------------------------------
+                 >|      NUMBER OF CARDS BY RARITY      |
+                 >---------------------------------------
+                 > Common: ${numberOfCommons()}        
+                 > Uncommon: ${numberOfUncommons()}    
+                 > Rare: ${numberOfRares()}            
+                 > Very Rare: ${numberOfVeryRares()}   
+                 > Ultra Rare: ${numberOfUltraRares()} 
+                 >
+            """.trimMargin(">")
+        return numOfCardsByRarity
+    }
+
+    // functions responsible for counting cards by rarities
+    fun numberOfCommons(): Int = cards.count { card: Card -> card.rarity.equals("common") }
+    fun numberOfUncommons(): Int = cards.count { card: Card -> card.rarity.equals("uncommon") }
+    fun numberOfRares(): Int = cards.count { card: Card -> card.rarity.equals("rare") }
+    fun numberOfVeryRares(): Int = cards.count { card: Card -> card.rarity.equals("very rare") }
+    fun numberOfUltraRares(): Int = cards.count { card: Card -> card.rarity.equals("ultra rare") }
+
     // this function looks through the cards and displays cards with
     // the corresponding rarity
     fun listByRarity(rarity: String) =
-        cards.filter { card -> card.rarity.equals(rarity, ignoreCase = true)}
-            .joinToString(separator = "\n") { card -> cards.indexOf(card).toString() + ": " + card.toString()  }
+        cards.filter { card -> card.rarity.equals(rarity, ignoreCase = true) }
+            .joinToString(separator = "\n") { card -> cards.indexOf(card).toString() + ": " + card.toString() }
 
     // this function looks through the cards and displays cards with
     // the corresponding name.
     fun searchByName(name: String) =
-        cards.filter { card -> card.name.contains(name, ignoreCase = true)}
-            .joinToString(separator = "\n") { card -> cards.indexOf(card).toString() + ": " + card.toString()  }
+        cards.filter { card -> card.name.contains(name, ignoreCase = true) }
+            .joinToString(separator = "\n") { card -> cards.indexOf(card).toString() + ": " + card.toString() }
 
     // this function looks through the cards and displays cards with
     // the corresponding quality
     fun listByQuality(quality: Int): String =
-        if(cards.isEmpty()) "No cards stored."
-        else cards.filter { card -> card.quality == quality }.joinToString(separator = "\n") { card -> cards.indexOf(card).toString() + ": " + card.toString() }
+        if (cards.isEmpty()) "No cards stored."
+        else cards.filter { card -> card.quality == quality }
+            .joinToString(separator = "\n") { card -> cards.indexOf(card).toString() + ": " + card.toString() }
 
     // this function loads the cards
     @Throws(Exception::class)

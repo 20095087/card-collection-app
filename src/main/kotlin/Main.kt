@@ -36,6 +36,8 @@ fun mainMenu(): Int {
                  > |   4) List Cards                     |
                  > ---------------------------------------
                  > |   5) Search by Name                 |
+                 > |   6) Number of Cards                |
+                 > |   7) Number of Cards by Rarity      |
                  > ---------------------------------------
                  > |   0) Exit                           |
                  > ---------------------------------------
@@ -65,6 +67,10 @@ fun runMenu(){
             4 -> listCards()
             // run searchByName function
             5 -> searchByName()
+            // run numberOfCards function
+            6 -> numberOfCards()
+            // run numberOfCardsByRarity function
+            7 -> numberOfCardsByRarity()
         }
     }while (true)
 }
@@ -236,6 +242,18 @@ fun listByRarity() {
     }
 }
 
+// this function runs the numberOfCards function from cardAPI and prints it to the console.
+fun numberOfCards(){
+    println(cardAPI.numberOfCards())
+}
+
+// this function runs the numberOfCardsByRarity function from cardAPI and prints it to the console.
+fun numberOfCardsByRarity(){
+    println(cardAPI.numberOfCardsByRarity())
+}
+
+// this function asks the user to enter the name of the card that they want to search for.
+// then it prints the searchByName function from cardAPI and passes in the name of the card
 fun searchByName(){
     var name = ScannerInput.readNextLine("Enter card name: ")
     println(cardAPI.searchByName(name))
