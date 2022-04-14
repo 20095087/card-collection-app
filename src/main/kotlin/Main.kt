@@ -247,6 +247,13 @@ fun numberOfCards(){
     println(cardAPI.numberOfCards())
 }
 
+// this function runs the numberOfCardsByRarity function from cardAPI and prints it to the console.
+fun numberOfCardsByRarity(){
+    println(cardAPI.numberOfCardsByRarity())
+}
+
+// this function asks the user to enter the name of the card that they want to search for.
+// then it prints the searchByName function from cardAPI and passes in the name of the card
 fun searchByName(){
     var name = ScannerInput.readNextLine("Enter card name: ")
     println(cardAPI.searchByName(name))
