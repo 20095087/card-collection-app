@@ -70,7 +70,17 @@ class CardAPI(serializerType: Serializer) {
     // this function is responsible for counting cards from all rarities.
     fun numberOfCardsByRarity(): String {
         var numOfCardsByRarity =
-            "Common: ${numberOfCommons()} \n Uncommon: ${numberOfUncommons()} \n Rare: ${numberOfRares()} \n Very Rare: ${numberOfVeryRares()} \n Ultra Rare: ${numberOfUltraRares()} \n"
+            """
+                 >---------------------------------------
+                 >|      NUMBER OF CARDS BY RARITY      |
+                 >---------------------------------------
+                 > Common: ${numberOfCommons()}        
+                 > Uncommon: ${numberOfUncommons()}    
+                 > Rare: ${numberOfRares()}            
+                 > Very Rare: ${numberOfVeryRares()}   
+                 > Ultra Rare: ${numberOfUltraRares()} 
+                 >
+            """.trimMargin(">")
         return numOfCardsByRarity
     }
 
