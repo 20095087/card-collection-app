@@ -238,7 +238,7 @@ fun listByRarity() {
 
 fun searchByName(){
     var name = ScannerInput.readNextLine("Enter card name: ")
-    println(cardAPI.listByName(name))
+    println(cardAPI.searchByName(name))
 }
 
 // this function calls the store fun from CardAPI

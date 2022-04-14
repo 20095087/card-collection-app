@@ -67,7 +67,7 @@ class CardAPI (serializerType: Serializer){
 
     // this function looks through the cards and displays cards with
     // the corresponding rarity
-    fun searchByRarity(rarity: String) =
+    fun listByRarity(rarity: String) =
         cards.filter { card -> card.rarity.equals(rarity, ignoreCase = true)}
             .joinToString(separator = "\n") { card -> cards.indexOf(card).toString() + ": " + card.toString()  }
 
