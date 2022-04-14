@@ -4,6 +4,7 @@ import mu.KotlinLogging
 import utils.ScannerInput.readNextLine
 import controllers.CardAPI
 import models.Card
+import persistence.JSONSerializer
 import persistence.XMLSerializer
 import utils.RarityUtility
 import utils.ScannerInput.readNextInt
@@ -13,7 +14,8 @@ import java.io.File
 
 // variables
 private val logger = KotlinLogging.logger {}
-private val cardAPI = CardAPI(XMLSerializer(File("cards.xml")))
+//private val cardAPI = CardAPI(XMLSerializer(File("cards.xml")))
+private val cardAPI = CardAPI(JSONSerializer(File("cards.json")))
 
 fun main(args: Array<String>) {
     // here we will load the files
