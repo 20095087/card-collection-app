@@ -158,9 +158,9 @@ fun updateCard(){
 // and all the cards inside it
 fun deleteCard(){
     //logger.info{"deleteCard() function invoked"}
-    // list the notes
+    // list the cards
     listAllCards()
-    // if there are notes
+    // if there are cards
     if (cardAPI.numberOfCards() > 0) {
         //only ask the user to choose the card to delete if card exist
         val indexToDelete = readNextInt("Enter the index of the card to delete: ")
