@@ -50,6 +50,8 @@ This is what the menu looks like:
                   |   4) List Cards                     |
                   ---------------------------------------
                   |   5) Search by Name                 |
+                  |   6) Number of Cards                |
+                  |   7) Number of cards by Rarity      |
                   ---------------------------------------
                   |   0) Exit                           |
                   ---------------------------------------
@@ -72,6 +74,8 @@ So far the app has a couple of functions that the user can use.
 3. Delete cards
 4. Display all cards
 5. Search by Name
+6. number of cards
+7. number of cards by rarity
 
 The app has persistence implemented into it therefore it can save and load the users cards collection. This is especially handy as we want to keep track of the cards the user has collected and allow them to execute functions on those cards.
 
